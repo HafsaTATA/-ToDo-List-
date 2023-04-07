@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My TODO App</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+<link rel="x-icon" href="favicon.ico" type="image/ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+   
+</head>
+<body>
+<div class="container"> 
+    <div id="mainContainer">
+        <input  id="date" type="date"/>    
+        <input  id="title" type="text" placeholder="Task to be done ^o^"/> 
+        <button id ="push" onclick="add()">ADD</button>
+    </div>
+    <div id="todo-list"></div>
+</div>
+
+    <script>
+     let todo=[]; 
+        //model:
+    const savedlist=JSON.parse(localStorage.getItem('todolist'));
+    todo=savedlist;
+    display();
+    function saveTodo(){
+        localStorage.setItem('todolist',JSON.stringify(todo));
+    }
+
+        //VIEW
+    function display(){
+    let listbox=document.getElementById('todo-list');
+    listbox.innerHTML='';
+    todo.forEach(task => {
+        const checkbox=document.createElement('input');
+        checkbox.type='checkbox';
+  
+        task.isdone=checkbox.checked;
+        checkbox.dataset.todoId=task.id;
+        checkbox.onchange=DONE;
+        const element=document.createElement('div');
+        element.innerText=' '+task.description+ ' | '+ task.date;
+
+        const deleteButton=document.createElement('button');
+        deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        deleteButton.style='margin-left: 12px';
+        deleteButton.onclick=deleteTodo;
+        deleteButton.id=task.id;
+
+        element.appendChild(deleteButton);
+        element.prepend(checkbox); 
+        listbox.appendChild(element); 
+
+        
+    });
+    }
+    function DONE(event){
+    const checkbox=event.target;
+    if(checkbox.checked){
+        todo.forEach(task => {
+            if (task.id==checkbox.dataset.todoId){
+                task.isdone=checkbox.checked;
+           //
+            }
+            
+        });
+        }
+    }
+
+       //CONTROL            
+     function add(){
+        const textbox=document.getElementById('title');
+        const task=textbox.value;
+        const datebox=document.getElementById('date');
+        const date=datebox.value;
+
+        const id=new Date().getTime();
+
+        todo.push({description:task,date:date,id:id,isdone:false});
+        saveTodo();
+        display();
+    }
+    function deleteTodo(event){
+       const deleteButton=event.target;
+       const idToDelete=deleteButton.id;
+       todo=todo.filter(function (task){
+        if (task.id==idToDelete){
+                return false;
+        }else{
+            return true;
+        }
+       });
+       saveTodo(); 
+       display();
+
+    }
+
+     </script>
+   
+</body>
+</html>

@@ -1,0 +1,131 @@
+@font-face {
+    font-family: myFont;
+    src: url(BaksoSapi.otf);
+}
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+body{
+    height:100vh;
+    background: linear-gradient(
+        135deg,
+        #B9F3E4,
+        #FFAACF
+
+    );
+}
+.container{
+    border: 2px solid white;
+    width: 40%;
+    min-width: 450px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:50%;
+    left: 50%; 
+    padding: 30px 40px;
+}
+
+#mainContainer{
+    background-color: white;
+    padding: 30px 20px ;
+    border-radius: 5px;
+    box-shadow: 0 15px 30px rgb(255, 255, 255);
+
+}
+
+
+#mainContainer input{
+    width: 70%;
+    height: 70%;
+    font-family: myFont;
+    font-size: 15px;
+    border: 2px solid #d1d3d4;
+    padding: 12px;
+    color: black;
+    position: relative;
+}
+#mainContainer input:focus{
+    outline: none;
+    border-color: #B9F3E4;
+}
+#mainContainer #date{
+    width: 25%;
+    height: 25%;
+    padding:10px 1px 0px 1px ;
+    font-family: myFont;
+}
+#mainContainer button{
+    position: relative;
+    float:right;
+    width: 20%;
+    height: 45px;
+    border-radius: 5px;
+    font-family: myFont;
+    font-weight: 500;
+    font-size: 16px;
+    background-color:#B9F3E4;
+    border: none;
+    color:white ;
+    cursor: pointer;
+}
+
+
+#todo-list {
+    margin-top:60px;
+    background-color: white;
+    padding: 30px 20px ;
+    border-radius: 10px;
+    box-shadow: 0 15px 30px  rgb(255, 255, 255);;
+    font-family: myFont;
+    font-size: 15px;
+    position: relative;
+}
+#todo-list > div{
+background-color: white;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 2px solid #d1d3d4;
+color: #757273c2;
+}
+
+#todo-list > div > button{
+   
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color:#B9F3E4;
+    color:white ;
+    cursor: pointer;
+}
+#todo-list  div > input{
+    appearance: none;
+    background-color: #d1d3d456;
+    border-radius: 5px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#todo-list  div > input:after{
+font-family: 'Font awesome 5 Free';
+font-weight: 900;
+content: "\f00c";
+font-size: 30px;
+color: #FFAACF;
+display: none;
+
+}
+#todo-list  div > input:checked{
+background-color: white;
+}
+#todo-list div>input:checked::after{
+    display: block;
+}
